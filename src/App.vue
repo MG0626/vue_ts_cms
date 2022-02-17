@@ -1,27 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <h1>APP</h1>
+  <router-view />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineComponent } from 'vue'
+import request from '@/services'
 
 export default defineComponent({
-  name: "App",
-  components: {
-    HelloWorld,
-  },
-});
+  name: 'App',
+  setup() {
+    request
+      .post({
+        url: '/login',
+        data: {
+          name: 'codertest',
+          password: '123456'
+        }
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+})
 </script>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="less"></style>
